@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS costs(
+    id INTEGER NOT NULL PRIMARY KEY,
+    year INTEGER NOT NULL,
+    month INTEGER NOT NULL,
+    day INTEGER NOT NULL,
+    shop TEXT NOT NULL,
+    spend REAL NOT NULL,
+    comment TEXT
+);

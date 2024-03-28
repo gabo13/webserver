@@ -1,0 +1,15 @@
+h1 {
+    margin: auto;
+    width: fit-content;
+}
+fieldset {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: fit-content;
+    gap: 10px;;
+    border-style: inset;
+}
+fieldset input {
+    border-style: outset;
+    text-align: right;
+}
