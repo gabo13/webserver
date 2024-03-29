@@ -5,19 +5,19 @@ costs/api
 
 print(f'{__name__} loaded')
 
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, flash
 from db import get_db
 from pprint import pprint
 
-
 api = Blueprint("api", __name__, url_prefix="/api")
+
+
 
 @api.route("/", methods=["GET", "POST"])
 def api_index():
     db = get_db()
     cur= db.cursor()
     if request.method == "GET":
-        
         print(dict(request.args)) # query string to dict
         cur.execute('SELECT count(id) AS records FROM costs;')
         record_count = dict(cur.fetchone())
@@ -48,19 +48,32 @@ def api_index():
         return jsonify({"msg": "ok"})
     
 
-@api.route("/getid/<id>") # egy elem kérése
+
+@api.route("/id/<id>", methods=["GET", "DELETE", "PUT"]) # egy elem kérése
 def get_one(id):
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT * FROM costs WHERE id = ?;", id)
-    record = cur.fetchone()
-    if not record:
-        return jsonify({"msg": f"No valid id: '{id}'"})
-    else:
-        return jsonify({
-            "data": dict(record),
-            "msg": "ok",
-        })
+    if request.method == "GET":
+        cur.execute("SELECT * FROM costs WHERE id = ?;", (id,))
+        record = cur.fetchone()
+        if not record:
+            return jsonify({"msg": f"No valid id: '{id}'"})
+        else:
+            return jsonify({
+                "data": dict(record),
+                "msg": "ok",
+            })
+    elif request.method == "DELETE":
+        print("delete id:",id)
+        cur.execute("DELETE FROM costs WHERE id = ?",(id,))
+        db.commit()
+        return jsonify({"msg":"delete"})
+    elif request.method == "PUT":
+        data = request.get_json()
+        print(data)
+        return jsonify({"msg":"delete"})
+
+
 
 @api.route("/getshops")
 def get_shops():

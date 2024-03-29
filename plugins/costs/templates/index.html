@@ -29,13 +29,14 @@
                 autocomplete="on" onclick="clearValue(this)">
 
             <label for="ID_shop">Bolt:</label>
-            <input type="text" name="shop" list="ID_shops_list" id="ID_shop" required autocomplete="off" onclick="clearValue(this)">
+            <input type="text" name="shop" list="ID_shops_list" id="ID_shop" data-clearable="true" required autocomplete="off">
             <datalist id="ID_shops_list"></datalist>
+
             <label for="ID_spend">Költség:</label>
-            <input type="text" name="spend" id="ID_spend" pattern="[0-9]+" required onclick="clearValue(this)">
+            <input type="text" name="spend" id="ID_spend" data-clearable="true" pattern="[0-9]+" required>
 
             <label for="ID_comment">Megjegyzés:</label>
-            <input type="text" name="comment" id="ID_comment" onclick="clearValue(this)">
+            <input type="text" name="comment" id="ID_comment" data-clearable="true">
 
         </fieldset>
         <div>

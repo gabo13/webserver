@@ -23,7 +23,6 @@ function getShops(){
     apiRequest("/costs/api/getshops","GET")
     .then(response=>response.json())
     .then(data => {
-        console.log("shops:", data)
         let shops = document.getElementById("ID_shops_list");
         shops.innerHTML="";
         for (let shop of data) {
@@ -64,32 +63,57 @@ async function renderTable(parentId) {
                 td.innerText = element;
                 tr.appendChild(td);
             });
+            let tdEdit = document.createElement("td")
+            tdEdit.innerText = "Edit";
+            tdEdit.dataset["id"] = record[0];
+            tdEdit.addEventListener("click",editHandler);
+            tr.appendChild(tdEdit);
+            let tdDel = document.createElement("td")
+            tdDel.innerText = "Del";
+            tdDel.dataset["id"] = record[0];
+            tdDel.addEventListener("click", deleteHandler);
+            tr.appendChild(tdDel);
             tbody.appendChild(tr);
         });
         table.appendChild(tbody);
-        
-        
         container.appendChild(table);
-        console.info("Refresh table ok")
+
+    });
+    console.info("Render table")
+}
+async function editHandler(event) {
+    let id = event.target.dataset.id;
+    alert(`Edit id: ${event.target.dataset.id}`)
+    //ezt írd meg
+    await apiRequest(`/costs/api/id/${id}`,"PUT")
+    .then((response) => {
 
     });
 }
-
-
+async function deleteHandler(event) {
+    let id = event.target.dataset.id;
+    if (confirm(`Törlöd az ${id} számú elemet?`)) {
+        await apiRequest(`/costs/api/id/${id}`,"DELETE")
+        .then((response)=>{
+            renderTable("ID_table");
+            alert(`${id} számú elem törölve`)
+        });
+    }
+}
 spendform.addEventListener("submit", async (ev) => {
     ev.preventDefault()
     let formdata = new FormData(ev.target)
-    console.log(formdata)
     let jsonData = Object.fromEntries(formdata.entries());
     jsonData.shop = jsonData.shop.toUpperCase();
     jsonData.comment = jsonData.comment.toUpperCase();
-    console.log(jsonData)
     await apiRequest("/costs/api/", "POST", jsonData)
         .then(data => data.json())
         .then(data => {
-            console.log("WTF")
             renderTable("ID_table");
         })
+    document.querySelectorAll("input[data-clearable = 'true']").forEach((element)=>{
+        element.value = "";
+    });
 })
 
 function testregex(regex) {
