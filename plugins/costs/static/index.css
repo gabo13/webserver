@@ -1,15 +1,40 @@
+:root {
+    --bg-color: #f4dc72;
+}
+
+* {
+    background-color: var(--bg-color);
+}
+
 h1 {
     margin: auto;
     width: fit-content;
 }
+
 fieldset {
     display: grid;
     grid-template-columns: auto auto;
     width: fit-content;
-    gap: 10px;;
-    border-style: inset;
+    gap: 10px;
+    border-style: groove;
 }
+
 fieldset input {
     border-style: outset;
     text-align: right;
+    text-transform: uppercase;
+}
+
+form div input[type = submit] {
+    margin: 10px auto;
+}
+
+table {
+    width: fit-content;
+    margin: auto;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
 }

@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('costs.static', filename='index.css') }}">
     <title>Költsegek</title>
     <style>
-        
+
     </style>
 </head>
+
 <body>
     <h1>Költségek</h1>
     <form action="" method="post" id="ID_spendform">
         <fieldset>
             <legend>Új költség</legend>
-        <label for="ID_year">Év:</label>
-        <input type="text" name="year" id="ID_year" pattern="2[0-9]{3}" placeholder="2000-től" required autocomplete="on">
-        
-        <label for="ID_month">Hónap:</label>
-        <input type="text" name="month" id="ID_month" pattern="[1-9]|1[0-2]" placeholder="1-12" required autocomplete="on">
-        
-        <label for="ID_day">Nap:</label>
-        <input type="text" name="day" id="ID_day" pattern="^([1-9]|[1-2][0-9]|3[0-1])$" placeholder="1-31" required autocomplete="on">
-        
-        <label for="ID_shop">Bolt:</label>
-        <input type="text" name="shop" id="ID_shop" required autocomplete="on">
+            <label for="ID_year">Év:</label>
+            <input type="text" name="year" id="ID_year" pattern="2[0-9]{3}" placeholder="2000-től" required
+                autocomplete="on" onclick="clearValue(this)">
 
-        <label for="ID_spend">Költség:</label>
-        <input type="text" name="spend" id="ID_spend" pattern="[0-9]+" required>
-        
-        <label for="ID_comment">Megjegyzés:</label>
-        <input type="text" name="comment" id="ID_comment">
-        
+            <label for="ID_month">Hónap:</label>
+            <input type="text" name="month" id="ID_month" pattern="[1-9]|1[0-2]" placeholder="1-12" required
+                autocomplete="on" onclick="clearValue(this)">
+
+            <label for="ID_day">Nap:</label>
+            <input type="text" name="day" id="ID_day" pattern="^([1-9]|[1-2][0-9]|3[0-1])$" placeholder="1-31" required
+                autocomplete="on" onclick="clearValue(this)">
+
+            <label for="ID_shop">Bolt:</label>
+            <input type="text" name="shop" list="ID_shops_list" id="ID_shop" required autocomplete="off" onclick="clearValue(this)">
+            <datalist id="ID_shops_list"></datalist>
+            <label for="ID_spend">Költség:</label>
+            <input type="text" name="spend" id="ID_spend" pattern="[0-9]+" required onclick="clearValue(this)">
+
+            <label for="ID_comment">Megjegyzés:</label>
+            <input type="text" name="comment" id="ID_comment" onclick="clearValue(this)">
+
         </fieldset>
-        <input type="submit" id="ID_submit" value="Felvesz" title="ID_submit">
+        <div>
+            <input type="submit" id="ID_submit" value="Felvesz" title="ID_submit">
+        </div>
+        <div id="ID_table"></div>
     </form>
 
     <script src="{{ url_for('costs.static', filename='index.js') }}"></script>
 </body>
+
 </html>
