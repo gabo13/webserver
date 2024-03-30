@@ -2,7 +2,8 @@
 * costs application
 * 2024.03.22
 """
-
+from os import getcwd
+print("costs dir:", getcwd())
 print(f'{__name__} loaded')
 
 from flask import Blueprint, render_template
@@ -14,6 +15,8 @@ blueprint_plugin.register_blueprint(api)
 
 @blueprint_plugin.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("costs.html")
 
-
+@blueprint_plugin.route("/statistic")
+def statistic():
+    return render_template("statistic.html")

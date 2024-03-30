@@ -1,7 +1,7 @@
 import importlib
 import pkgutil
 import plugins
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, render_template
 
 def create_app():
     app =  Flask(__name__)
@@ -22,7 +22,7 @@ app = create_app()
 
 @app.route('/')
 def index():
-    return 'MAIN PAGE'
+    return render_template("index.html")
 
 @app.route('/favicon.ico')
 def favicon():

@@ -1,22 +1,3 @@
-
-async function apiRequest(endpoint, method, data = null) {
-    let options = {
-        method: method,
-        cache: "no-cache",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        //body: JSON.stringify(data)
-    }
-    if (data) {
-        options.body = JSON.stringify(data)
-    }
-
-    const response = await fetch(endpoint, options)
-    return response
-}
-
-
 const spendform = document.getElementById("ID_spendform")
 
 function getShops(){
