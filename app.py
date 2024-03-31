@@ -28,8 +28,11 @@ def index():
 def favicon():
     return send_from_directory(app.static_folder, 'images/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-
+"""
 print('\n***********************\nurl_map:')
 print(app.url_map)
 print('***********************')
-app.run(host= '0.0.0.0', port=8080, debug=True)
+"""
+
+if __name__ == "__main__":
+    app.run(host= '0.0.0.0', port=8080, debug=True)
