@@ -38,12 +38,4 @@ rules.sort()
 print(*rules,sep="\n")
 app.run(host= '0.0.0.0', port=8080, debug=True)
 =======
-"""
-print('\n***********************\nurl_map:')
-print(app.url_map)
-print('***********************')
-"""
-
-if __name__ == "__main__":
-    app.run(host= '0.0.0.0', port=8080, debug=True)
 >>>>>>> 0ccccf5cb0f7ddf6d88fab89d329e04878a5743a
