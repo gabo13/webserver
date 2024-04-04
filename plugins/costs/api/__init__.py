@@ -92,12 +92,17 @@ def statistic():
     cur = db.cursor()
     queries = {
         "month_details" : "SELECT shop, SUM(spend) as spend FROM costs WHERE month = 1 GROUP BY shop ORDER BY spend DESC;",
-        "month_details2" : "select year, month, shop, sum(spend) from costs group by year, month, shop order by year, month, sum(spend) desc;"
+        "month_details2" : "select year, month, shop, sum(spend), count(shop) from costs group by year, month, shop order by year, month, sum(spend) desc;",
+        "month_sum" : "SELECT year, month, sum(spend) AS spend FROM costs GROUP BY year, month;"
     }
     
     cur.execute(queries["month_details2"])
     db_rows = cur.fetchall()
     data_list =[list(row) for row in db_rows]
+    cur.execute(queries["month_sum"])
+    db_sum = cur.fetchall()
+    sum_list = [list(row) for row in db_sum]
+    pprint(sum_list)
     #json elkészítése
     month_details = dict()
     for row in data_list:
@@ -110,4 +115,7 @@ def statistic():
         if not month_details.get(row[0]).get(row[1]):
             month_details[row[0]][row[1]]= list()
         month_details[row[0]][row[1]].append(row[2:])
-    return jsonify(month_details)
+    return jsonify({
+        "month_details" : month_details,
+        "month_sum" : sum_list,
+    })
