@@ -53,6 +53,7 @@ def api_index():
 def get_one(id):
     db = get_db()
     cur = db.cursor()
+    
     if request.method == "GET":
         cur.execute("SELECT * FROM costs WHERE id = ?;", (id,))
         record = cur.fetchone()
@@ -63,15 +64,17 @@ def get_one(id):
                 "data": dict(record),
                 "msg": "ok",
             })
+            
     elif request.method == "DELETE":
         print("delete id:",id)
         cur.execute("DELETE FROM costs WHERE id = ?",(id,))
         db.commit()
         return jsonify({"msg":"delete"})
+    
     elif request.method == "PUT":
         data = request.get_json()
         print(data)
-        return jsonify({"msg":"delete"})
+        return jsonify({"msg":"edit"})
 
 
 
