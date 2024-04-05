@@ -72,8 +72,18 @@ def get_one(id):
         return jsonify({"msg":"delete"})
     
     elif request.method == "PUT":
+        """UPDATE tablaneve SET oszlopnev = újérték WHERE id=adott_id"""
         data = request.get_json()
         print(data)
+        cur.execute("""UPDATE costs SET
+                    year = data.year,
+                    month= data.month,
+                    day= data.day,
+                    shop= data.shop,
+                    spend= data.spend,
+                    comment= data.comment WHERE id=?""",
+                    (id,))
+        db.commit()
         return jsonify({"msg":"edit"})
 
 
