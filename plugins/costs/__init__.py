@@ -1,7 +1,9 @@
 """
 * costs application
-* 2024.03.22
+* 2024.04.06
 """
+
+print(f'{__name__} loaded')
 
 from flask import Blueprint, render_template
 from .api import api

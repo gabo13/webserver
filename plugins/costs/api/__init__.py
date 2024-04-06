@@ -74,15 +74,23 @@ def get_one(id):
     elif request.method == "PUT":
         """UPDATE tablaneve SET oszlopnev = újérték WHERE id=adott_id"""
         data = request.get_json()
-        print(data)
+        print("request data:",data)
         cur.execute("""UPDATE costs SET
-                    year = data.year,
-                    month= data.month,
-                    day= data.day,
-                    shop= data.shop,
-                    spend= data.spend,
-                    comment= data.comment WHERE id=?""",
-                    (id,))
+                    year = ?,
+                    month= ?,
+                    day= ?,
+                    shop= ?,
+                    spend= ?,
+                    comment= ? WHERE id=?""",
+                    (
+                        data.get("year"),
+                        data.get("month"),
+                        data.get("day"),
+                        data.get("shop"),
+                        data.get("spend"),
+                        data.get("comment"),
+                        id
+                    ))
         db.commit()
         return jsonify({"msg":"edit"})
 
@@ -101,12 +109,11 @@ def statistic():
     db = get_db()
     cur = db.cursor()
     queries = {
-        "month_details" : "SELECT shop, SUM(spend) as spend FROM costs WHERE month = 1 GROUP BY shop ORDER BY spend DESC;",
-        "month_details2" : "select year, month, shop, sum(spend), count(shop) from costs group by year, month, shop order by year, month, sum(spend) desc;",
+        "month_details" : "select year, month, shop, sum(spend), count(shop) from costs group by year, month, shop order by year, month, sum(spend) desc;",
         "month_sum" : "SELECT year, month, sum(spend) AS spend FROM costs GROUP BY year, month;"
     }
     
-    cur.execute(queries["month_details2"])
+    cur.execute(queries["month_details"])
     db_rows = cur.fetchall()
     data_list =[list(row) for row in db_rows]
     cur.execute(queries["month_sum"])

@@ -1,0 +1,13 @@
+:root {
+    --notepaper-color: #f4dc72;
+}
+
+* {
+    background-color: var(--notepaper-color);
+    color: black;
+}
+
+h1 {
+    margin: auto;
+    width: fit-content;
+}

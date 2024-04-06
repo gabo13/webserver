@@ -45,3 +45,17 @@ function createTable(title, header, data) {
     table.appendChild(tbody);
     return table
 }
+
+function setFormData(formID, jsonData) {
+    let form = document.getElementById(formID);
+    let inputList = form.querySelectorAll('input[name]');
+    let keyList = Object.keys(jsonData);
+    inputList.forEach(inputElement => {
+        keyList.forEach(validKey => {
+            if (inputElement.name == validKey) {
+                inputElement.value = jsonData[validKey]
+            }
+        });
+    });
+    console.log(inputList);
+}

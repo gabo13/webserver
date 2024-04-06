@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('costs.static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('costs.static', filename='costs.css') }}">
     <title>Költsegek</title>
     <style>
 
@@ -13,6 +13,7 @@
 
 <body>
     <h1>Költségek</h1>
+    <a href="{{ url_for('index') }}">Főoldal</a>
     <form action="" method="post" id="ID_spendform">
         <fieldset>
             <legend>Új költség</legend>
@@ -33,14 +34,16 @@
             <datalist id="ID_shops_list"></datalist>
 
             <label for="ID_spend">Költség:</label>
-            <input type="text" name="spend" id="ID_spend" data-clearable="true" pattern="[0-9]+" required>
+            <input type="text" name="spend" id="ID_spend" data-clearable="true" pattern="[0-9]+" required autocomplete="off">
 
             <label for="ID_comment">Megjegyzés:</label>
-            <input type="text" name="comment" id="ID_comment" data-clearable="true">
+            <input type="text" name="comment" id="ID_comment" data-clearable="true" autocomplete="off">
 
+            <input type="hidden" id="Id_id" name="id">
         </fieldset>
         <div>
             <input type="submit" id="ID_submit" value="Felvesz" title="ID_submit">
+            <a href="{{ url_for('costs.statistic') }}">Költség statisztika</a>
         </div>
         <div id="ID_table"></div>
     </form>

@@ -66,8 +66,16 @@ async function editHandler(event) {
     let id = event.target.dataset.id;
     alert(`Edit id: ${event.target.dataset.id}`)
     //ezt írd meg
-    await apiRequest(`/costs/api/id/${id}`,"PUT")
-    .then((response) => {
+    await apiRequest(`/costs/api/id/${id}`,"GET",)
+    .then((response) => response.json())
+    .then( jsonData => {
+        let legend = document.querySelector("legend");
+        let submitBtn = document.getElementById("ID_submit");
+
+        legend.innerText = "Szerkesztés";
+        submitBtn.value = "Módosít";
+        setFormData("ID_spendform", jsonData.data);
+        console.log(jsonData)
 
     });
 }
@@ -85,16 +93,31 @@ spendform.addEventListener("submit", async (ev) => {
     ev.preventDefault()
     let formdata = new FormData(ev.target)
     let jsonData = Object.fromEntries(formdata.entries());
+    let submitBtn = document.getElementById("ID_submit");
+    let legend = document.querySelector("legend");
+
     jsonData.shop = jsonData.shop.toUpperCase();
     jsonData.comment = jsonData.comment.toUpperCase();
-    await apiRequest("/costs/api/", "POST", jsonData)
-        .then(data => data.json())
-        .then(data => {
-            renderTable("ID_table");
-        })
+    if (submitBtn.value == "Felvesz") {
+        await apiRequest("/costs/api/", "POST", jsonData)
+            .then(data => data.json())
+            .then(data => {
+                renderTable("ID_table");
+            })
+    }
+    if (submitBtn.value == "Módosít") {
+        await apiRequest(`/costs/api/id/${jsonData.id}`, "PUT", jsonData)
+            .then(data => data.json())
+            .then(data => {
+                renderTable("ID_table");
+                submitBtn.value = "Felvesz";
+                legend.innerText = "Új költség"
+            })
+    }
     document.querySelectorAll("input[data-clearable = 'true']").forEach((element)=>{
         element.value = "";
     });
+    document.querySelector("#ID_shop").focus();
 })
 
 function testregex(regex) {

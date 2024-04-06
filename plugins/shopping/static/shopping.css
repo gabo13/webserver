@@ -1,0 +1,47 @@
+:root {
+    --notepaper-color: #f4dc72;
+}
+
+* {
+    box-sizing: border-box;
+    background-color: var(--notepaper-color);
+    color: black;
+  }
+
+h1 {
+    margin: auto;
+    width: fit-content;
+}
+
+input, button {
+    border-radius: 5rem;
+}
+
+#net_status {
+    background-color: var(--notepaper-color);
+    color: black;
+    font-size: small;
+    text-transform: capitalize;
+}
+
+#btn_save {
+    margin-left: 10px;
+    background-color: var(--notepaper-color);
+    color: black;
+}
+
+li {
+    padding: 10px 10px;
+}
+
+#ready_list ul {
+    /*text-decoration: line-through;*/
+    list-style-type: none;
+}
+
+#ready_list li:before {
+    content: "\2713";
+    margin-left: -1em;
+    margin-right: 1em;
+    text-decoration: unset;
+}

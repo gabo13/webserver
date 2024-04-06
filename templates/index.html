@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>Document</title>
 </head>
 <body>
     <h1>RASPBERRY PI 3 B+ SERVER</h1>
     <ol>
-        <li><a href="{{ url_for('costs.index') }}">Costs</a></li>
+        <li>
+            <h2>Költségek:</h2>
+            <ol>
+                <li><a href="{{ url_for('costs.index') }}">Költségek szerkesztése</a></li>
+                <li><a href="{{ url_for('costs.statistic') }}">Költség statisztika</a></li>
+            </ol>
+            <h2>Bevásárlás:</h2>
+            <ol>
+                <li><a href="{{ url_for('shopping.index') }}">Bevásárló lista</a></li>
+            </ol>
+        </li>
     </ol>
 </body>
 </html>

@@ -3,6 +3,8 @@ import pkgutil
 import plugins
 from flask import Flask, send_from_directory, render_template
 
+print(f'{__name__} loaded')
+
 def create_app():
     app =  Flask(__name__)
     for _, name, _ in pkgutil.iter_modules(plugins.__path__, plugins.__name__ + "."):

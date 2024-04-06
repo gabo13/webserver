@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('shopping.static', filename='shopping.css') }}">
+    <title>Költsegek</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bevásárló lista<span id="net_status"></span><button id="btn_save">Mentés</button></h1>
+    </header>
+    <a href="{{ url_for('index') }}">Főoldal</a>
+    
+    <dialog id="dialog">
+        <p id="dialog_msg"></p>
+        <form method="dialog">
+            <button>OK</button>
+        </form>
+    </dialog>
+    <main>
+        <div>
+            <!-- <form action="" method="post"> -->
+                <label for="item">Áru:</label>
+                <input id="input_item" type="text">
+                <input id="btn_add" type="button" value="+">
+            <!-- </form> -->
+        </div>
+        <div id="rendered_list">
+            <hr>
+            <h3>Szükséges: </h3>
+            <div id="pending_list"></div>
+            <hr>
+            <h3>Kész: <input id="btn_clear" type="button" value="Előzmények törlése"></input></h3>
+            <div id="ready_list"></div>
+        </div>
+    </main>
+    <script src="{{ url_for('shopping.static', filename='shopping.js') }}"></script>
+</body>
+</html>
