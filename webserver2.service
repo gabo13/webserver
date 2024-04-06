@@ -8,7 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=pi
-ExecStart="/home/pi/AUTOMAT/webserver2/pi_server/run.sh"
+ExecStart="/home/pi/AUTOMAT/webserver2/run.sh"
 
 [Install]
 WantedBy=multi-user.target
