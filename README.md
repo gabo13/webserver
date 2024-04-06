@@ -1,5 +1,7 @@
 # RASPBERRY PI 3 B+ SERVER
 
+https://nts.strzibny.name/systemd-user-services/
+
 installed modules:
 - flask
 

@@ -2,7 +2,7 @@ import importlib
 import pkgutil
 import plugins
 from flask import Flask, send_from_directory, render_template
-
+from flask_cors import CORS
 print(f'{__name__} loaded')
 
 def create_app():
@@ -17,6 +17,7 @@ def create_app():
     app.config['DATABASE']='data/database.sqlite'
     import db
     db.init_app(app)
+    CORS(app)
     
     return(app)
 
@@ -35,5 +36,9 @@ def favicon():
 
 rules = [rule.rule for rule in app.url_map.iter_rules()]
 rules.sort()
+print("*****RULES: *****")
 print(*rules,sep="\n")
-app.run(host= '0.0.0.0', port=8080, debug=True)
+
+
+if __name__ == "__main__":
+    app.run(host= '0.0.0.0', port=8080, debug=True)
