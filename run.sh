@@ -1,9 +1,9 @@
 #!/bin/bash
 
 export APP_PATH=$(realpath $(dirname $0))
-export SHOPPING_JSON="$APP_PATH/data/shopping_list.json"
+export SHOPPING_LIST="$APP_PATH/data/shopping_list.json"
 export FLASK_APP="$APP_PATH/app.py"
-#echo "Script path: $app_path"
+echo "Script path: $APP_PATH"
 if  [ $USER == pi ]
 then
     export FLASK_DEBUG=False
