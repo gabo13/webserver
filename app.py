@@ -34,6 +34,8 @@ def index():
 def favicon():
     return send_from_directory(app.static_folder, 'images/favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+
+
 rules = [rule.rule for rule in app.url_map.iter_rules()]
 rules.sort()
 print("*****RULES: *****")
