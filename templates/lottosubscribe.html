@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottó hírlevél</title>
+    <style>
+        div {
+        margin: 5px;
+        }
+        .flex {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .img {
+            width: 201px;
+            height:84px;
+            margin-bottom: 25px;
+            background-image: url(https://bet.szerencsejatek.hu/assets/4624e63e/b5dd8708/img/sprite-game-logos.png);
+            background-repeat: no-repeat;
+            background-position: -5px -5px;
+            box-sizing: border-box;
+        }
+
+        h1, div, form, p {
+            margin-auto;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h1>Lottós szerencsétlenek</h1>
+    <div class="img"></div>
+    <p>Lottó hírlevél feliratkozás vagy leiratkozás</p>
+    <form action="/lotto" method="post">
+        <div class="flex">
+            <label for="email">Email cím:</label>
+            <input type="email" name="email" id="email">
+        </div>
+        <div>
+        <input type="submit" value="Fel- vagy leiratkozás">
+        <div>
+    </form>
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener("submit", async (event)=> {
+            event.preventDefault();
+            let formdata = new FormData(event.target);
+            let jsonData = Object.fromEntries(formdata.entries());
+            await fetch("/lotto/subscribe/api", {
+                method: "POST",
+                cache: "no-cache",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(jsonData)
+            })
+            .then(response => response.json())
+            .then(jsonData => {
+                alert(jsonData.msg)
+            })
+        })
+    </script>
+</body>
+
+</html>

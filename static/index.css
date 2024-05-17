@@ -11,3 +11,21 @@ h1 {
     margin: auto;
     width: fit-content;
 }
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+}
+
+.menu > a {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: auto 5px;
+    padding: 5px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+}
