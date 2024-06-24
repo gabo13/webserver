@@ -10,10 +10,6 @@ then
     $APP_PATH/venv/bin/flask run --host=0.0.0.0 --port=80
 else
     export FLASK_DEBUG=True
-<<<<<<< HEAD
     $APP_PATH/venv/bin/flask run --host=0.0.0.0 --port=8080
 fi
-=======
-    $APP_PATH/venv/bin/flask run --host=0.0.0.0 --port=8888
-fi
->>>>>>> f90a15b244186cd00acd5303ff318e28293dd5e6
+
