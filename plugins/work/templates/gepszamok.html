@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('work.static', filename='work.css') }}">
+  <title>Gépszámok</title>
+
+  <style>
+    h1 {
+      margin-bottom: 35px;
+    }
+    #data {
+      position: fixed;
+      z-index: 1;
+      top: 55px;
+      color: yellow;
+      background-color: black;
+      
+      border: 2px dashed yellow;
+      
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Gépszámok</h1>
+  <p id="data"></p>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>CCL1</th>
+        <th>CCL2</th>
+        <th>CCL3</th>
+        <th>CCL4</th>
+        <th>CCL5</th>
+        <th>CCL6</th>
+        <th>CCL7</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AF03</td>
+        <td>Kasto</td>
+        <td>8152</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>AF10</td>
+        <td>EMAG</td>
+        <td>8153</td>
+        <td>8207</td>
+        <td>8220</td>
+        <td>8234</td>
+        <td>8247</td>
+        <td>8261</td>
+        <td>8273</td>
+      </tr>
+      <tr>
+        <td>AF20</td>
+        <td>EMAG</td>
+        <td>8154</td>
+        <td>8208</td>
+        <td>8221</td>
+        <td>8235</td>
+        <td>8248</td>
+        <td>8262</td>
+        <td>8274</td>
+      </tr>
+      <tr>
+        <td>AF30</td>
+        <td>EMAG</td>
+        <td>8155</td>
+        <td>8209</td>
+        <td>8222</td>
+        <td>8236</td>
+        <td>8249</td>
+        <td>8263</td>
+        <td>8275</td>
+      </tr>
+      <tr>
+        <td>AF40</td>
+        <td>FORST</td>
+        <td>8156</td>
+        <td>8210</td>
+        <td>8223</td>
+        <td>8237</td>
+        <td>8250</td>
+        <td>8264</td>
+        <td>8276</td>
+      </tr>
+      <tr>
+        <td>AF50</td>
+        <td>EMAG</td>
+        <td>8157</td>
+        <td>8211</td>
+        <td>8224</td>
+        <td>8238</td>
+        <td>8251</td>
+        <td>8265</td>
+        <td>8277</td>
+      </tr>
+      <tr>
+        <td>AF60</td>
+        <td>EMAG</td>
+        <td>8158</td>
+        <td>8212</td>
+        <td>8225</td>
+        <td>8239</td>
+        <td>8252</td>
+        <td>8266</td>
+        <td>8278</td>
+      </tr>
+      <tr>
+        <td>AF70</td>
+        <td>EMAG</td>
+        <td>8159</td>
+        <td>8213</td>
+        <td>8227</td>
+        <td>8240</td>
+        <td>8253</td>
+        <td>8267</td>
+        <td>8279</td>
+      </tr>
+      <tr>
+        <td>AF80</td>
+        <td>JUNKER</td>
+        <td>8160</td>
+        <td>8214</td>
+        <td>8228</td>
+        <td>8241</td>
+        <td>8255</td>
+        <td>8268</td>
+        <td>8280</td>
+      </tr>
+      <tr>
+        <td>AF90</td>
+        <td>JUNKER</td>
+        <td>8201</td>
+        <td>8215</td>
+        <td>8229</td>
+        <td>8242</td>
+        <td>8256</td>
+        <td>8269</td>
+        <td>8281</td>
+      </tr>
+      <tr>
+        <td>AF100</td>
+        <td>BODYCOTE</td>
+        <td>8202</td>
+        <td>8216</td>
+        <td>8230</td>
+        <td>8243</td>
+        <td>8257</td>
+        <td>8270</td>
+        <td>8282</td>
+      </tr>
+      <tr>
+        <td>AF103</td>
+        <td>SANPLA</td>
+        <td>8203</td>
+        <td>8217</td>
+        <td>8231</td>
+        <td>8244</td>
+        <td>8258</td>
+        <td>8286</td>
+        <td>8283</td>
+      </tr>
+      <tr>
+        <td>AF110</td>
+        <td>PTR</td>
+        <td>8204</td>
+        <td>8218</td>
+        <td>8232</td>
+        <td>8245</td>
+        <td>8259</td>
+        <td>8271</td>
+        <td>8284</td>
+      </tr>
+      <tr>
+        <td>AF120</td>
+        <td>TIELENHAUS</td>
+        <td>8205</td>
+        <td>8219</td>
+        <td>8233</td>
+        <td>8246</td>
+        <td>8260</td>
+        <td>8272</td>
+        <td>8285</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <script type="text/javascript" language="javascript">
+    function cellclick(cell){
+		//alert(cell.innerHTML);
+		var parent = cell.parentNode;
+		var tbl = cell.parentNode.parentNode; //ez csak a tbody
+		var col=Array.prototype.indexOf.call(parent.children, cell) ;
+		var row=Array.prototype.indexOf.call(parent.parentNode.children,parent);
+		var head= document.getElementsByTagName("th");
+		var data = document.getElementById("data");
+		data.innerHTML=head[col].innerHTML+" "+tbl.rows[row].cells[0].innerHTML+" "+cell.innerHTML;
+    /*alert("Gépszám:\n"+data.innerHTML);*/
+	}
+	var tbl= document.getElementsByTagName("table")[0] ;
+	if (tbl) {
+		for (i=0; i<tbl.rows.length; i++) {
+			for (j=0; j<tbl.rows[i].cells.length; j++) {
+				tbl.rows[i].cells[j].onclick = function() {cellclick(this);};
+			}
+		}
+	}
+  </script>
+</body>
+
+</html>

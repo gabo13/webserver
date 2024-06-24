@@ -15,7 +15,8 @@ def create_app():
         except Exception as e:
             print("Exception: ", e)
 
-    app.config['DATABASE']='/home/pi/AUTOMAT/webserver2/data/database.sqlite'
+    #app.config['DATABASE']='/home/pi/AUTOMAT/webserver2/data/database.sqlite'
+    app.config['DATABASE']='./data/database.sqlite'
     import db
     db.init_app(app)
     CORS(app)
