@@ -1,0 +1,316 @@
+<html>
+	<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="fallout.css"> -->
+<title>Fallout</title>
+<style>
+@keyframes scan {
+            0% {
+                background-position: 0 -100vh;
+            }
+            35%,
+            100% {
+                background-position: 0 100vh;
+            }
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* outline: 1px dotted red; */
+        }
+        html {
+            background-color: black;
+            height: 90vh;
+        }
+        body {
+            height: 90vh;
+            background-color: blue;
+            margin: 5px;
+            /* overflow: hidden; */
+        }
+        .screen {
+            border-radius: 1em;
+            background-color: #131;
+            background-image: radial-gradient(ellipse 500% 100% at 50% 90%, transparent, #121);
+            background-position: center;
+            display: block;
+            height: 99vh;
+            padding: 2em;
+            box-shadow: inset 0 0 10em 1em rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            font-family: monospace;
+            color: rgba(128, 255, 128, 0.8);
+            position: relative;
+        }
+        .screen::before {
+            /*refresh scan line*/
+            position: absolute;
+            content: "";
+            display: block;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background-image: linear-gradient(0deg, transparent 0%, rgba(32, 128, 32, 0.2) 2%, rgba(32, 128, 32, 0.8) 3%, rgba(32, 128, 32, 0.2) 3%, transparent 100%);
+            background-repeat: no-repeat;
+            animation: scan 7.5s linear 0s infinite;
+        }
+        .screen::after {
+            position: absolute;
+            content: "";
+            display: block;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background-image: radial-gradient(ellipse 50% 15% at 50% 15%, rgba(255, 255, 255, 0.05), transparent),
+                radial-gradient(ellipse 50% 10% at 50% 12%, rgba(255, 255, 255, 0.1), transparent),
+                radial-gradient(ellipse 50% 5% at 50% 10%, rgba(255, 255, 255, 0.1), transparent),
+                radial-gradient(ellipse 50% 3% at 50% 9%, rgba(255, 255, 255, 0.1), transparent),
+                radial-gradient(ellipse 200% 20% at 50% 0%, rgba(0, 0, 0, 0.5), transparent),
+                linear-gradient(0deg, rgba(0, 0, 0, 0.2) 50%, transparent 50%);
+            background-size: 100%, 100%, 100%, 100%, 100%, 100% 0.25ch;
+        }
+        .title {
+            text-transform: uppercase;
+            margin: 3px;
+        }
+        .title::before {
+            position: relative;
+            top: 0.1em;
+            content: "[";
+            font-size: 2em;
+        }
+        .title::after {
+            position: relative;
+            top: 0.1em;
+            content: "]";
+            font-size: 2em;
+        }
+        .value {
+            text-indent: 5%;
+        }
+        input {
+            background-color: inherit;
+            border-color: transparent;
+            border-radius: 0.5em;
+            caret-color: #1f1;
+            caret-shape: block;
+            color: #1f1;
+            text-align: right;
+        }
+        input:focus {
+            border-color: none;
+            outline: none;
+        }
+        table {
+            border: 1px solid #1f1;
+            border-collapse: collapse;
+            width:100%;
+        }
+        th,
+        td {
+            border: 1px solid #1f1;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        p {
+        	font-size: 20px;
+        }
+        .mini {
+        	font-size: 10px;
+        }
+</style>
+</head>
+<body class="screen">
+<div class="darabszam">
+  <div>
+    <p class="title">Darabszám</p>
+    <p class="value">Műszakonkénti darabszám: 
+      <span id="db-muszak"></span>db
+    </p>
+    <p class="value">Taktidő: 
+      <span id="taktido"></span>sec.
+    </p>
+    <p class="value">Darabszam kell: 
+      <span id="db-kell"></span>
+    </p>
+    <p class="value mini" id="status">
+      <!--span id="status"></span-->
+    </p>
+    <p class="value mini" style="position: relative; top:-0.5em;">
+__________________________________________________
+</p>
+    <p class="value">Darabszám van: 
+      <span>[</span>
+      <input type="text" size="4" id="db-van">
+      <span>]</span>
+    </p>
+    <p class="value">Állásidő: 
+      <span id="allas"></span>
+    </p>
+  </div>
+</div>
+<div class="korrekcio">
+  <p class="title">Korrekciók</p>
+  <table>
+    <caption>
+      <h3>EVO 4 / B-CYCLE</h3>
+    </caption>
+    <tbody>
+      <tr>
+        <th>Gép</th>
+        <th>Protokol</th>
+        <th>Korrekció</th>
+      </tr>
+      <tr>
+        <td>AF90</td>
+        <td>➕</td>
+        <td>➕</td>
+      </tr>
+      <tr>
+        <td>AF80</td>
+        <td>➕</td>
+        <td>➕</td>
+      </tr>
+      <tr>
+        <td>AF60-70</td>
+        <td>➕</td>
+        <td>➕</td>
+      </tr>
+      <tr>
+        <td>AF50</td>
+        <td>➕</td>
+        <td>➖</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <caption>
+      <h3>GEN 3</h3>
+    </caption>
+    <tbody>
+      <tr>
+        <th>Gép</th>
+        <th>Protokol</th>
+        <th>Korrekció</th>
+      </tr>
+      <tr>
+        <td>AF90</td>
+        <td>➕</td>
+        <td>➖</td>
+      </tr>
+      <tr>
+        <td>AF80</td>
+        <td>➕</td>
+        <td>➖</td>
+      </tr>
+      <tr>
+        <td>AF60-70</td>
+        <td>➕</td>
+        <td>➕</td>
+      </tr>
+      <tr>
+        <td>AF50</td>
+        <td>➕</td>
+        <td>➕</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script>
+		const db_kell_html = document.querySelector("#db-kell");
+        const db_van_html = document.querySelector("#db-van");
+        const db_muszak_html = document.querySelector("#db-muszak");
+        const db_taktido_html = document.querySelector("#taktido");
+        const db_allas_html = document.querySelector("#allas");
+        const db_status_html = document.querySelector('#status');
+        // tóraperc -> másodperc
+            const t0540 = 20400;
+            const t0550 = 21000;
+            const t0600 = 21600;
+            const t1340 = 49200;
+            const t1350 = 49800;
+            const t1400 = 50400;
+            const t2140 = 78000;
+            const t2150 = 78600;
+            const t2200 = 79200;
+            const t2400 = 86400;
+            const t0800 = 28800;
+            const t1140 = 42000;
+            const t1200 = 43200;
+            const t1740 = 63600;
+            const t1750 = 64200;
+            const t1800 = 64800;
+            const darabszam = 527;
+            const taktido = t1140/darabszam;
+            let db_kell = 0;
+            let db_van = 0;
+            let muszak_ido = 0;
+            let allas = 0;
+            db_muszak_html.textContent = darabszam;
+            db_taktido_html.textContent = taktido.toPrecision(4);
+        db_van_html.addEventListener("click", (e) => { //edit nullázása
+            e.target.value = "";
+        });
+        db_van_html.addEventListener("input", (e) => { //edit nem szám
+            let db_van = Number(e.target.value);
+            if (!db_van) {
+                //alert("Nem lehet az adott értéket konvertálni!");
+                e.target.value = "";
+            }
+            let allas = (db_van-db_kell)*taktido/60;
+            if (allas < 0) {
+                db_allas_html.style.color = "orange";
+            } else {
+                db_allas_html.style.color = "rgba(128, 255, 128, 0.8)";    
+            }
+            db_allas_html.textContent = Math.round(allas)+ "perc";
+        });
+        getSec = () => {
+            let date = new Date();
+            let hour = date.getHours() * 3600;
+            let min = date.getMinutes() * 60;
+            let sec = date.getSeconds();
+            return hour + min + sec;
+        }
+        timeToSec = (hour, min, sec) => {
+            let _hour = hours * 3600;
+            let _min = min * 60;
+            let _sec = sec;
+            return _hour + _min + _sec;
+        }
+        getMuszakIdo = ()=> {
+            let muszakIdo;
+            // műszakból eltelt idő kiszámítása:
+            let now = getSec();
+            if (now > t0600 && now < t1740) { //nappalos
+                muszakIdo = now - t0600;
+            } else if (now > t1800) { //éjjeles éjfélig
+                muszakIdo = now - t1800;
+            } else if (now < t0540) { // éjjeles éjfél után
+                muszakIdo = now + t0600;
+            } else { // műszakváltás alatt
+                muszakIdo = taktido;
+            }
+            return muszakIdo;
+        }
+        render = () => {
+            muszak_ido = getMuszakIdo();
+            db_kell = Math.ceil(muszak_ido/taktido);
+            db_kell_html.textContent = db_kell;
+            db_status_html.textContent = '_'.repeat(
+				
+				Math.ceil((muszak_ido%taktido)/taktido*50)
+				
+		);
+            //console.log(muszak_ido/taktido,muszak_ido%taktido);
+        }
+        setInterval(render, 1000);
+</script>
+</body>
+</html>

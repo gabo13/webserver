@@ -11,15 +11,16 @@
         }
         table {
             margin-top: 10px;
-        }
+        }        
     </style>
 </head>
 <body>
-    <h1>Havi statisztika</h1>
+    <div class="menu">
+    <span>Menü:</span>
     <a href="{{ url_for('index') }}">Főoldal</a>
-    <div>
-        <a href="{{ url_for('costs.index') }}">Költségek szerkesztése</a>
+    <a href="{{ url_for('costs.index') }}">Költségek szerkesztése</a>
     </div>
+    <h1>Havi statisztika</h1>
     <div id="ID_sum"></div>
     <div id="ID_tables"></div>
     <script src="{{ url_for('costs.static', filename='utils.js') }}"></script>

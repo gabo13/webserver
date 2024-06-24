@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!--META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"-->
+	<meta http-equiv="Cache-Control" content="max-age=60">
+
+	<style>
+		* {
+			background-color: black;
+			color: yellow;
+			border-color: yellow;
+			font-size: 5vw;
+		}
+
+		h1,
+		h2 {
+			text-align: center;
+			padding-top: 10px;
+			text-shadow: 2px 2px 5px orange;
+		}
+
+		div {
+			/*border-style: solid;*/
+			margin-top: 5px;
+			clear: both;
+		}
+
+
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			border: 1px solid yellow;
+		}
+
+		td,
+		th {
+			width: 20%;
+			text-align: center;
+			border-bottom: 1px solid #fff;
+			border-collapse: collapse;
+
+		}
+
+		tbody tr:nth-child(odd) td {
+			background-color: #444;
+		}
+
+		form {
+			margin: 10px;
+		}
+
+		#log * {
+			font-family: "Lucida Console", "Courier New", monospace;
+			font-size: 0.7em;
+		}
+
+		legend {
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Gáz fogyasztás</h1>
+	<p>Éves limit: 1728m<sup>3</sup></p>
+	<p>Átlagos havi limit: 144m<sup>3</sup></p>
+	<div id=month_consumption>
+		<table>
+			<caption>Fogyasztási határok</caption>
+			<thead>
+				<tr>
+					<th>Hónap</th>
+					<th>Havi (m<sup>3</sup>)</th>
+					<th>Napi (m<sup>3</sup>)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Január</td>
+					<td>329.06</td>
+					<td>10.615</td>
+				</tr>
+				<tr>
+					<td>Február</td>
+					<td>270.77</td>
+					<td>9.670</td>
+				</tr>
+				<tr>
+					<td>Március</td>
+					<td>223.11</td>
+					<td>7.197</td>
+				</tr>
+				<tr>
+					<td>Április</td>
+					<td>116.79</td>
+					<td>3.893</td>
+				</tr>
+				<tr>
+					<td>Május</td>
+					<td>36.4</td>
+					<td>1.174</td>
+				</tr>
+				<tr>
+					<td>Június</td>
+					<td>15.71</td>
+					<td>0.524</td>
+				</tr>
+				<tr>
+					<td>Július</td>
+					<td>16.24</td>
+					<td>0.524</td>
+				</tr>
+				<tr>
+					<td>Augusztus</td>
+					<td>16.24</td>
+					<td>0.524</td>
+				</tr>
+				<tr>
+					<td>Szeptember</td>
+					<td>37.6</td>
+					<td>1.253</td>
+				</tr>
+				<tr>
+					<td>Október</td>
+					<td>143.66</td>
+					<td>4.634</td>
+				</tr>
+				<tr>
+					<td>November</td>
+					<td>216.98</td>
+					<td>7.233</td>
+				</tr>
+				<tr>
+					<td>December</td>
+					<td>306.44</td>
+					<td>9.885</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<fieldset>
+		<legend>Havi fogyasztások</legend>
+		<div>
+			<form>
+				<label for=diktalas_ido>Utolsó diktálás ideje:</label>
+				<input type="date" id="diktalas_ido" />
+				<br><br>
+				<label for=diktalas_mennyiseg>Utolso bediktált mennyiség:</label>
+				<input type="text" id="diktalas_mennyiseg" size="5" />
+				<input type="button" value="Számol" id="szamol" onclick="fszamol()" />
+			</form>
+		</div>
+
+	</fieldset>
+	<div>
+		<fieldset>
+			<legend>Termosztát</legend>
+			<p>00:00 - 20.5&#8451</p>
+			<p>07:00 - 21.0&#8451</p>
+			<p>19:00 - 22.0&#8451</p>
+			<p>21:00 - 20.5&#8451</p>
+		</fieldset>
+	</div>
+	<fieldset style="display: none;">
+		<legend>Leolvasások:</legend>
+		<div id="leolvasasok"></div>
+	</fieldset>
+	<div>
+		<pre id="log"></pre>
+	</div>
+	
+	<!-- <script src="sheetdb.js"></script> -->
+	<script>
+		let diktalas_ido = document.getElementById("diktalas_ido");
+		let diktalas_mennyiseg = document.getElementById("diktalas_mennyiseg");
+
+		window.addEventListener("load", (event) => {
+			console.info("Document Loaded.")
+			diktalas_ido.value = readData("diktalas_ido");
+			diktalas_mennyiseg.value = readData("diktalas_mennyiseg");
+		});
+
+
+		function writeData(name, value) {
+			if (typeof (Storage) !== "undefined") {
+				localStorage.setItem(name, value);
+				console.log("Write to storage:", name, " - ", value);
+			}
+			else
+				document.write("No Web storage, sorry.");
+		}
+
+
+		function readData(name) {
+			if (typeof (Storage) !== "undefined") {
+				let ret = localStorage.getItem(name);
+				if (ret == null) {
+					console.log(name + "not found");
+					return "";
+				} else {
+					console.log("Read from storage:", name, " - ", ret);
+					return ret;
+				}
+			}
+			else
+				alert("No Web storage, sorry.");
+			return;
+		}
+
+		napi_fogyasztas = [10.615, 9.670, 7.197, 3.893, 1.174, 0.524, 0.524, 0.524, 1.253, 4.634, 7.233, 9.885]
+
+		function dateDiffinDays(befor, after) {
+			return (after.getTime() - befor.getTime()) / (1000 * 3600 * 24);
+		}
+		function fszamol() {
+			if (diktalas_ido.value != "" && diktalas_mennyiseg.value != "") {
+				//saveToSheet(diktalas_ido.value, diktalas_mennyiseg.value);
+				//loadFromSheet();
+				writeData("diktalas_ido", diktalas_ido.value);
+				writeData("diktalas_mennyiseg", diktalas_mennyiseg.value);
+
+				mennyiseg = parseFloat(diktalas_mennyiseg.value);
+				most = new Date();
+				leolvasas_datum = new Date(diktalas_ido.value);
+
+				const log = document.getElementById("log");
+				let template = ""
+				while (dateDiffinDays(leolvasas_datum, most) > 1) {
+					leolvasas_datum.setDate(leolvasas_datum.getDate() + 1);
+					mennyiseg = mennyiseg + napi_fogyasztas[leolvasas_datum.getMonth()];
+					template += "<p>" + leolvasas_datum.toLocaleDateString() + " +" + napi_fogyasztas[leolvasas_datum.getMonth()] + " -> " + Math.round(mennyiseg) + "</p>";
+
+				}
+				log.innerHTML = template
+			} else {
+				alert("Kérlek tölts ki minden mező!")
+			}
+		}
+
+	</script>
+</body>
+
+</html>

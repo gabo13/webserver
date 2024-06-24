@@ -10,7 +10,7 @@ import os
 
 blueprint_plugin = Blueprint("shopping", __name__, url_prefix="/shopping", template_folder="templates", static_folder="static")
 
-os.environ["SHOPPING_LIST"] = "./data/shopping_list.json"
+#os.environ["SHOPPING_LIST"] = "./data/shopping_list.json"
 
 DATA = {"pending": [], "ready": []}
 
