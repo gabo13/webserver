@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale-1.0">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('work.static', filename='work.css') }}">
+	<title>Gabisoft-Nullpont</title>
+
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<h1>Nullpont számítás</h1>
+	<div style="float: left;width: 100px;">
+		<form onclick="showRadio()">
+			<input type="radio" id="bcycle" name="type" value="bcycle" checked>
+			<label for="bcycle">B ciklus<br></label>
+			<input type="radio" id="gen3" name="type" value="gen3">
+			<label for="gen3">Gen 3<br></label>
+			<input type="radio" id="evo4" name="type" value="evo4">
+			<label for="evo4">Evo 4</label>
+		</form>
+	</div>
+	<div style="display: inline-block;">
+		<h3 style="padding-left: 10px; padding-right: 5px; float: left;">Type:</h3>
+		<h3 style="display: inline-block; padding-right: 10px;" id="selected"></h3>
+		<br style="clear: both;">
+	</div>
+	<div>
+		<div style="float: left;padding-right: 30px; ">
+			<p>Bal oldal</p>
+			<p id="left">Left</p>
+			<input id="leftedit" type="text" name="left" size="6">
+		</div>
+		<div style="display: inline-block; padding-left: 30px;">
+			<p>Jobb oldal</p>
+			<p id="right">Right</p>
+			<input id="rightedit" type="text" name="right" size="6">
+		</div>
+	</div>
+	<br style="clear: both;"><br>
+	<button type="button" onclick="szamol()">Szamol</button>
+	<h1 id="symmetry"></h1>
+
+	<script>
+		function getRadioValue() {
+			var elem = document.getElementsByName("type");
+			for (i = 0; i < elem.length; i++) {
+				if (elem[i].checked) {
+					return elem[i].value;
+				}
+			}
+		}
+
+		function showRadio() {
+			var select = getRadioValue();
+			document.getElementById("selected").innerHTML = select;
+			switch (select) {
+				case "bcycle":
+					document.getElementById("left").innerHTML = "50.87";
+					document.getElementById("right").innerHTML = "26.99";
+					break;
+				case "gen3":
+					document.getElementById("left").innerHTML = "26.99";
+					document.getElementById("right").innerHTML = "49.27";
+					break;
+				case "evo4":
+					document.getElementById("left").innerHTML = "26.99";
+					document.getElementById("right").innerHTML = "49.27";
+					break;
+				default:
+					break;
+			}
+		}
+
+		function szamol() {
+			let eleft = document.getElementById("left").innerHTML;
+			let eright = document.getElementById("right").innerHTML;
+			let left = document.getElementById("leftedit").value;
+			let right = document.getElementById("rightedit").value;
+			let symmetry = ((left - eleft) - (right - eright)) / 2;
+			let html = document.getElementById("symmetry");
+			if (isNaN(symmetry)) {
+				html.style.color = "red";
+				symmetry = "Vessző helyett pontot használj!";
+			} else {
+				html.style.color = "yellow";
+			}
+			html.innerHTML = symmetry.toFixed(2);
+		}
+		window.onload = showRadio();
+	</script>
+</body>
+
+</html>

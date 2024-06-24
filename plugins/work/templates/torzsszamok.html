@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('work.static', filename='work.css') }}">
+
+  <title>Törzsszámok</title>
+  <style>
+    .tsz {
+      height: 50dvh;
+      overflow: scroll;
+      padding-left: 10px;
+      border: 1px solid yellow;
+      margin-top: 10px;
+    }
+    .mk {
+      color: chartreuse;
+    }
+    .muszak {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Törzsszámok</h1>
+  <div>
+    <label for="filter">Szűrés</label>
+    <input id="filter" type="text" oninput="change(this)">
+  </div>
+  <div class="tsz">
+    <p>00257 Németh Ákos <span class="mk">(FTL)</span> <span class="muszak">(CCL-C)</span></p>
+    <p>00278 Horváth Róbert <span class="mk">(FTL)</span> <span class="muszak">(CCL-B)</span></p>
+    <p>00571 Kiss Attila <span class="mk">(mérnök)</span></p>
+    <p>00872 Erdős Ferenc <span class="muszak">(CCL-C)</span></p>
+    <p>00971 Kósa András <span class="mk">(FTL)</span></p>
+    <p>00981 Szabó Gábor <span class="muszak">(CCL-B)</span></p>
+    <p>01038 Cseri László <span class="mk">(FTL)</span></p>
+    <p>01180 Eőri László <span class="muszak">(CCL-C)</span></p>
+    <p>01195 Vér Tivadar <span class="muszak">(CCL-D)</span></p>
+    <p>01330 Szalai László <span class="muszak">(CCL-A)</span></p>
+    <p>01617 László Gyula <span class="muszak">(CCL-B)</span></p>
+    <p>01632 Termeczky József</p>
+    <p>01663 Reisinger Zoltán <span class="mk">(TK)</span> <span class="muszak">(CCL-C)</span></p>
+    <p>02003 Jámbor György <span class="muszak">(CCL-A)</span></p>
+    <p>02333 Szabó Norbert <span class="muszak">(CCL-B)</span></p>
+    <p>02505 Bors László <span class="mk">(mérnök)</span></p>
+    <p>02518 Magyar Attila <span class="mk">(karbantartó)</span> <span class="muszak">(CCL-A)</span></p>
+    <p>02933 Ihász Lészló</p>
+    <p>03039 Bokodi Imre <span class="muszak">(CCL-A)</span></p>
+    <p>03654 Dér István <span class="muszak">(CCL-C)</span></p>
+    <p>03749 Róth Gyula</p>
+    <p>03830 Bazsó Róbert</p>
+    <p>04243 Reif Zoltán <span class="muszak">(CCL-C)</span></p>
+    <p>04576 Szabó László <span class="muszak">(CCL-B)</span></p>
+    <p>04659 Kanozsai Csaba <span class="mk">(mérnök)</span></p>
+    <p>04769 Kurcsics Tibor <span class="muszak">(CCL-C)</span></p>
+    <p>05657 Erneszt Gábor <span class="mk">(mérnök)</span></p>
+    <p>05864 Szebényi Zsolt <span class="muszak">(CCL-C)</span></p>
+    <p>05933 Jakatics László <span class="muszak">(CCL-D)</span></p>
+    <p>06867 Ivánkovics József <span class="muszak">(CCL-B)</span></p>
+    <p>07046 Kovács Attila <span class="muszak">(CCL-B)</span></p>
+    <p>07221 Fedor Mihály <span class="muszak">(CCL-C)</span></p>
+    <p>07290 Gombás Gyula</p>
+    <p>07379 Baranyai Zoltán <span class="muszak">(CCL-B)</span></p>
+    <p>08264 Kustor László <span class="muszak">(CCL-D)</span></p>
+    <p>08277 Stefamics Tamás</p>
+    <p>08350 Dácher Károly <span class="muszak">(CCL-A)</span></p>
+    <p>08372 Farkas Balázs <span class="muszak">(CCL-D)</span></p>
+    <p>08422 Takács Roland</p>
+    <p>08433 Váczy Balázs <span class="muszak">(CCL-B)</span></p>
+    <p>08504 Szalai Bálint <span class="mk">(TK)</span> <span class="muszak">(CCL-A)</span></p>
+    <p>09282 Takács Attila <span class="muszak">(CCL-D)</span></p>
+    <p>09549 Kiss László <span class="mk">(karbantartó)</span> <span class="muszak">(CCL-B)</span></p>
+    <p>09560 Sághi Lóránt</p>
+    <p>10583 Gyűrüsi Gábor <span class="mk">(TK)</span> <span class="muszak">(CCL-B)</span></p>
+    <p>10618 Szórádi Róbert <span class="muszak">(CCL-C)</span></p>
+    <p>10965 Tulner László <span class="muszak">(CCL-D)</span></p>
+    <p>11098 Nemes Gábor <span class="muszak">(CCL-D)</span></p>
+    <p>11783 Szórádi Zoltán <span class="muszak">(CCL-A)</span></p>
+    <p>12244 Horváth Csaba <span class="muszak">(CCL-A)</span></p>
+    <p>12262 Gulyás Imre Tamás <span class="muszak">(CCL-C)</span></p>
+    <p>12368 Sándor René</p>
+    <p>12453 Dóka Árpád</p>
+    <p>12703 Tarjány István</p>
+    <p>13766 Pék Lajos</p>
+    <p>13780 Borza Attila</p>
+    <p>13822 Horváth Gábor <span class="muszak">(CCL-D)</span></p>
+    <p>14406 Csizmazia László <span class="muszak">(CCL-D)</span></p>
+    <p>14409 Kovacsics László <span class="muszak">(CCL-B)</span></p>
+    <p>14644 Sági Máté <span class="mk">(vezető)</span></p>
+    <p>14700 Takács Attila <span class="muszak">(CCL-D)</span></p>
+    <p>14711 Csordás Csaba</p>
+    <p>14875 Dávid Attila</p>
+    <p>14889 Gerencsér Andrea <span class="mk">(TK)</span> <span class="muszak">(CCL-D)</span></p>
+    <p>14927 Vidáné Csizmazia Magdolna</p>
+    <p>15099 Csigi Antal <span class="muszak">(CCL-B)</span></p>
+    <p>15165 Máthé Erika <span class="muszak">(CCL-A)</span></p>
+    <p>15200 Szabó Tamás</p>
+    <p>15201 Gősi Gábor <span class="mk">(TK)</span> <span class="muszak">(CCL-D)</span></p>
+    <p>15203 Szűcs Szabolcs <span class="muszak">(CCL-C)</span></p>
+    <p>15259 Szabó Ernőné Csilla</p>
+    <p>15261 Antal Tihamér <span class="muszak">(CCL-A)</span></p>
+    <p>15805 Kolonics Mihály</p>
+    <p>16078 Horváth Dániel</p>
+    <p>16268 Szabó Csaba</p>
+    <p>16458 Babos Zoltán <span class="muszak">(CCL-C)</span></p>
+    <p>16459 Kálmán Attila <span class="muszak">(CCL-A)</span></p>
+    <p>17098 Molnár Noémi <span class="muszak">(CCL-A)</span></p>
+    <p>17100 Kemenczei Marcell</p>
+    <p>17102 Varga László <span class="muszak">(CCL-A)</span></p>
+    <p>17179 Katona Zsolt</p>
+    <p>17534 Ábrahám Balázs <span class="muszak">(CCL-D)</span></p>
+    <p>18734 Bodroghalmi Zsolt <span class="mk">(mérnök)</span></p>
+    <p>19112 Albertné Búzás Ildikó <span class="muszak">(CCL-B)</span></p>
+    <p>19384 Erdődi Tamás</p>
+    <p>19386 Ákos József <span class="mk">(TK)</span> <span class="muszak">(CCL-A)</span></p>
+    <p>20350 Kmetti Balázs <span class="muszak">(CCL-D)</span></p>
+    <p>20885 Horváth Balázs Csaba <span class="muszak">(CCL-A)</span></p>
+    <p>20937 Bilisich Ferenc <span class="muszak">(CCL-D)</span></p>
+    <p>21536 Kiss Zoltán <span class="muszak">(CCL-C)</span></p>
+    <p>24807 Ditrich Lajos</p>
+    <p>25656 Basák Szabolcs <span class="muszak">(CCL-D)</span></p>
+    <p>25827 Forró Attila <span class="muszak">(CCL-D)</span></p>
+    <p>28159 Mahr Roland <span class="muszak">(CCL-D)</span></p>
+    <p>29072 Borszéki Márton <span class="mk">(karbantartó)</span> <span class="muszak">(CCL-C)</span></p>
+    <p>29367 Fábián Richárd</p>
+    <p>29444 Géber Krisztián</p>
+    <p>19454 Gulyás Bence <span class="muszak">(CCL-A)</span></p>
+    <p>29296 Bittman Attila <span class="muszak">(CCL-B)</span></p>
+    <p>29501 Istenes László</p>
+    <p>29502 Orsós Dave</p>
+    <p>29523 Szabó Bence <span class="mk">(karbantartó)</span> <span class="muszak">(CCL-D)</span></p>
+    <p>29526 Gulyás Erik Tibor</p>
+    <p>29538 Danyi István Ferenc <span class="muszak">(CCL-B)</span></p>
+    <p>29543 Pleszinger Róbert <span class="muszak">(CCL-B)</span></p>
+    <p>29565 Bődör Ferenc <span class="muszak">(CCL-C)</span></p>
+    <p>29567 Hőbe Roland</p>
+    <p>29766 Tanos István</p>
+    <p>31754 Szabó Krisztián <span class="mk">(mérnök)</span></p>
+    <p>33198 Siklodi Csaba <span class="muszak">(CCL-C)</span></p>
+    <p>33253 Szarka László <span class="muszak">(CCL-D)</span></p>
+    <p>33359 Feil Péter <span class="muszak">(CCL-C)</span></p>
+    <p>34650 Takács Orsolya <span class="muszak">(CCL-B)</span></p>
+    <p>35190 Pál roland <span class="mk">(gyakornok)</span></p>
+    <p>36160 Nagy Dominik Péter <span class="muszak">(CCL-A)</span></p>
+    <p>36185 Nagy Katalin Rebeka <span class="muszak">(CCL-A)</span></p>
+  </div>
+  <p>Műszakok beosztás: 2023-09-11 4/4</p>
+  <script>
+    var ps = document.querySelectorAll(".tsz > p");
+    console.log(ps)
+    function change(obj) {
+      var val = obj.value.toUpperCase()
+      //console.log(">", val, "<")
+      for (var p of ps) {
+        if (!val) {
+          p.style.display = "block";
+        }
+        else if (p.innerText.toUpperCase().includes(val)) {
+          p.style.display = "block";
+        }
+        else {
+          p.style.display = "none";
+        }
+      }
+    } 
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale-1.0" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('work.static', filename='favicon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('work.static', filename='work.css') }}"/>
+    <title>CCL</title>
+    <style media="screen">
+      html {
+        overflow: auto;
+      }
+
+      html,
+      body {
+        margin: 0px;
+        padding: 0px;
+        height: 100%;
+        border: none;
+        width: 100%;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropbtn {
+        background-color: yellow;
+        color: black;
+        padding: 5px;
+        border: none;
+        display: inline-block;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: yellow;
+        width: 100%;
+        /* min-width: 100px;
+      max-width: 150px;
+      float: left; */
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        border: 1px solid black;
+      }
+
+      .dropdown-content a:hover {
+        background-color: black;
+        color: yellow;
+        border: 1px solid red;
+      }
+
+      .bar1,
+      .bar2,
+      .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: black;
+        margin: 6px 0;
+      }
+
+      .reszleg {
+        float: right;
+        margin-left: 20px;
+      }
+
+      iframe {
+        display: block;
+        width: 100%;
+        border: none;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 90%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="dd" class="dropdown">
+      <div id="dbtn" class="dropbtn">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <div class="reszleg">G/P4-57 NW CCL Team 1/D<br />9126</div>
+      <div id="ddc" class="dropdown-content" style="left: 0">
+        <a href="{{ url_for('work.work_darabszam') }}" target="iframe1">Darabszám</a>
+        <a href="{{ url_for('work.work_torzsszamok') }}" target="iframe1">Törzsszámok</a>
+        <a href="{{ url_for('work.work_selejt') }}" target="iframe1">Selejt</a>
+        <a href="{{ url_for('work.work_tpm') }}" target="iframe1">TPM</a>
+        <a href="{{ url_for('work.work_gepszamok') }}" target="iframe1">Gépszámok</a>
+        <a href="{{ url_for('work.work_koszorukovek') }}" target="iframe1">Köszörükövek</a>
+        <a href="{{ url_for('work.work_nullpont') }}" target="iframe1">Nullpont</a>
+        <a href="{{ url_for('work.work_okossagok') }}" target="iframe1">Okossagok</a>
+        <a href="{{ url_for('work.work_evo5') }}" target="iframe1">Evo5</a>
+      </div>
+    </div>
+    <hr style="clear: both" />
+    <iframe name="iframe1" src="{{ url_for('work.work_darabszam') }}">Hello</iframe>
+    <script>
+      var dbtn = document.getElementById("dbtn");
+      var ddc = document.getElementById("ddc");
+      ddc.style.display = "none";
+
+      // ha kiválasztok egy menüpontot
+      function fabtn() {
+        if (ddc.style.display != "none") {
+          ddc.style.display = "none";
+        } else {
+          ddc.style.display = "block";
+        }
+      }
+
+      ddc
+        .querySelectorAll("a")
+        .forEach((a) => a.addEventListener("click", fabtn));
+
+      // ha a menü ikont nyomkodom
+      dbtn.addEventListener("click", () => {
+        if (ddc.style.display != "none") {
+          ddc.style.display = "none";
+        } else {
+          ddc.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>
