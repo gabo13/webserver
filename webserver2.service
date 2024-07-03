@@ -1,13 +1,14 @@
 [Unit]
-Description=Pi_server service
+Description=webserver service
 After=network.target
 StartLimitIntervalSec=0
 
 [Service]
 Type=simple
 Restart=always
-RestartSec=1
+RestartSec=10
 User=pi
+WorkingDirectory=/home/pi/AUTOMAT/webserver2
 ExecStart="/home/pi/AUTOMAT/webserver2/run.sh"
 
 [Install]
