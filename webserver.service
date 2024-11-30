@@ -8,8 +8,8 @@ Type=simple
 Restart=always
 RestartSec=10
 User=pi
-WorkingDirectory=/home/pi/AUTOMAT/webserver2
-ExecStart="/home/pi/AUTOMAT/webserver2/run.sh"
+WorkingDirectory=/home/gabo13/Automation/webserver
+ExecStart="/home/gabo13/Automation/webserver/run.sh"
 
 [Install]
 WantedBy=multi-user.target
