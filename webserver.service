@@ -7,7 +7,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=10
-User=pi
+User=gabo13
 WorkingDirectory=/home/gabo13/Automation/webserver
 ExecStart="/home/gabo13/Automation/webserver/run.sh"
 
